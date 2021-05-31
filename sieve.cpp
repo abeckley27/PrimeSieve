@@ -4,12 +4,20 @@
 #include <cmath>
 #include <cstdint>
 
+void printarray(int64_t* a, int len) {
+	int i;
+	for (i = 0; i < len; i++) {
+		std::cout << a[i] << '\t';
+	}
+	std::cout << std::endl;
+}
+
 int main(int argc, char* argv[]) {
 
 	clock_t t0 = clock();
 
 	// Declarations
-	const int N = 1000000;
+	const int N = 500;
 	int_fast64_t* nums = new int_fast64_t[N];
 	int i, j;
 
@@ -19,6 +27,8 @@ int main(int argc, char* argv[]) {
 
 	// Set the odd numbers below N
 	for (x = 3; x < N; x += 2) { nums[x] = x; }
+
+	printarray(nums, N);
 	x = 3;
 
 	// Remove multiples of x
@@ -34,17 +44,19 @@ int main(int argc, char* argv[]) {
 		}
 
 		x += 2;
+		printarray(nums, N);
 	}
 
 	std::ofstream f;
 	f.open("primes.txt");
-	for (i = 0; i < N; i++) {
+	f << nums[2] << '\t';
+	for (i = 3; i < N; i += 2) {
 		if (nums[i] > 0) { f << nums[i] << '\t'; }
 	}
 	f << std::endl;
 	f.close();
-
-	std::cout << "Time: " << double(clock() - t0) / CLOCKS_PER_SEC << " s \n";
+	clock_t t1 = clock();
+	std::cout << "Time: " << double(t1 - t0) / CLOCKS_PER_SEC << " s \n";
 
 	delete[] nums;
 	return 0;
