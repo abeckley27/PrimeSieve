@@ -19,11 +19,23 @@ int main(int argc, char* argv[]) {
 
 	clock_t t0 = clock();
 	int_fast64_t N = 1000;
-	if (argc > 1) { N = std::stoi(argv[1]); }
+	if (argc == 2) { N = std::stol(argv[1]); }
+	else {
+		if (argc > 2)
+		{
+			double co = std::stod(argv[1]);
+			int ex = std::stoi(argv[2]);
+			N = co * pow(10, ex);
+		}
+	}
+
+	std::cout << "Finding primes below " << N << std::endl;
 
 	int_fast64_t arraylen = 2 + (N/2);
 	int_fast64_t* nums = new int_fast64_t[arraylen];
 	int_fast64_t i, j;
+
+	std::cout << log10(N) << std::endl;
 
 	for (i = 0; i < arraylen; i++) { nums[i] = 0; }
 	int_fast64_t x;
