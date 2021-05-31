@@ -5,8 +5,8 @@
 #include <cmath>
 #include <cstdint>
 
-void printarray(int64_t* a, int len) {
-	int i;
+void printarray(int64_t* a, int64_t len) {
+	int_fast64_t i;
 	for (i = 0; i < len; i++) {
 		std::cout << a[i] << '\t';
 	}
@@ -16,11 +16,11 @@ void printarray(int64_t* a, int len) {
 int main(int argc, char* argv[]) {
 
 	clock_t t0 = clock();
-	int N = 1000;
+	int_fast64_t N = 1000;
 	if (argc > 1) { N = std::stoi(argv[1]); }
 
 	int_fast64_t* nums = new int_fast64_t[N];
-	int i, j;
+	int_fast64_t i, j;
 
 	for (i = 0; i < N; i++) { nums[i] = 0; }
 	int_fast64_t x = 3;
