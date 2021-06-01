@@ -118,7 +118,7 @@ int main(int argc, char* argv[]) {
 		std::ofstream f;
 		f.open("primes.txt");
 		f << 2 << '\t';
-		for (j = 0; j < array_size; j++) 
+		for (j = 1; j < array_size; j++) 
 		{
 			if (nums[0][j] > 0) {f << nums[0][j] << '\t';}
 		}
