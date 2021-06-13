@@ -4,6 +4,9 @@
 #include <ctime>
 #include <cmath>
 #include <cstdint>
+#include <list>
+
+using namespace std;
 
 void printarray(int64_t* a, int64_t len) {
 	int_fast64_t i;
@@ -16,6 +19,16 @@ void printarray(int64_t* a, int64_t len) {
 inline int_fast64_t array_index(int_fast64_t k, int_fast64_t len) {
 	int_fast64_t k1 = (k-1) / 2;
 	return k1 % len;
+}
+
+inline bool is_prime(int64_t x, int64_t l, int64_t* plist) {
+	int64_t i, j;
+	bool result = true;
+
+	for (i = 0; i < l; i++) {
+		if (x % plist[i] == 0) { result = false; }		
+	}
+	return result;
 }
 
 int main(int argc, char* argv[]) {
@@ -66,6 +79,7 @@ int main(int argc, char* argv[]) {
 		if (nums[i] > 0) { count++; }
 	}
 
+	// Copy the first set of primes into a new array
 	int64_t* primelst = new int64_t[count + 1];
 	i = 0;
 	j = 0;
@@ -78,8 +92,20 @@ int main(int argc, char* argv[]) {
 	}
 
 	delete[] nums;
+	x = N2;
+	if (x % 2 == 0) { x++; }
+	list<int64_t> primelist2;
 
+	// WAAYYYY SLOWER	
+	while (x < N1) 
+	{
+		if (is_prime(x, j, primelst)) { primelist2.push_front(x); }
+		x += 2;
+	}
 
+	string fname = "primes_under_";
+	fname += to_string(N1);
+	fname += ".txt";
 	
 	t1 = clock();
 	std::cout << "Pi(" << N2 << ") = " << count << std::endl;
