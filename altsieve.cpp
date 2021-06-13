@@ -31,6 +31,14 @@ inline bool is_prime(int64_t x, int64_t l, int64_t* plist) {
 	return result;
 }
 
+int64_t count_len(list<int64_t>& pl) {
+	int64_t result = 0;
+	int64_t* ptr;
+	ptr = &pl.front();
+
+	return *ptr; 
+}
+
 int main(int argc, char* argv[]) {
 
 	clock_t t0 = clock();
@@ -103,9 +111,19 @@ int main(int argc, char* argv[]) {
 		x += 2;
 	}
 
+	ofstream f;
 	string fname = "primes_under_";
 	fname += to_string(N1);
 	fname += ".txt";
+	f.open(fname);
+
+	for (i = 0; i < j; i++) {
+		f << primelst[i] << '\t';
+	}
+	f << endl;
+	f.close();
+
+
 	
 	t1 = clock();
 	std::cout << "Pi(" << N2 << ") = " << count << std::endl;
