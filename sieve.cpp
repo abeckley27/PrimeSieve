@@ -25,7 +25,7 @@ int main(int argc, char* argv[]) {
 	int_fast64_t N = 1000;
 	if (argc == 2) { N = std::stol(argv[1]); }
 	else {
-		if (argc == 3)
+		if (argc == 3)	// For input in scientific notation
 		{
 			double co = std::stod(argv[1]);
 			int ex = std::stoi(argv[2]);
@@ -40,6 +40,8 @@ int main(int argc, char* argv[]) {
 	{
 		int_fast64_t arraylen = 2 + (N/2);
 		std::cout << "Array length is " << arraylen << std::endl;
+
+		// No need to store every number. This could be done with a bit array
 		int_fast64_t* nums = new int_fast64_t[arraylen];
 		int_fast64_t i, j;
 
