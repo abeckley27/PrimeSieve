@@ -78,6 +78,7 @@ bool is_prime(int64_t n) {
     }
 
     delete[] s;
+	delete[] prime_array;
 
     return output;
 }

@@ -22,6 +22,9 @@ int main(int argc, char* argv[]) {
             int64_t* p_array = bitmap_to_array(s, N);
             int64_t len = primecount(s, N);
             printarray(p_array, len);
+
+            delete[] s;
+            delete[] p_array;
         }
 
     }
@@ -34,6 +37,9 @@ int main(int argc, char* argv[]) {
 
         std::cout << "Primes below " << N_demo << std::endl;
         printarray(p_array, len);
+
+        delete[] s;
+        delete[] p_array;
     }
 
     return 0;
