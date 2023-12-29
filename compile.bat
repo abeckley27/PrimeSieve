@@ -1,2 +1,2 @@
 @echo off
-g++ ./sieve.cpp -o primes -O2
+g++ ./main.cpp -o primes -O2

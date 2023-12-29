@@ -15,7 +15,7 @@ int main(int argc, char* argv[]) {
 	int64_t i;
 
 	// Allow for the upper bound to be specified as an argument
-	if (argc > 1) { N = std::stol(argv[1]); }
+	if (argc > 1) { N = std::stoll(argv[1]); }
 
 	bool* s = run_sequential_sieve(N);
 	clock_t t1 = clock();
