@@ -40,13 +40,12 @@ bool* run_sequential_sieve(const int64_t N) {
 }
 
 // This function allocates memory
-int64_t* bitmap_to_array(bool* s, int64_t len, int64_t outputlen) {
+int64_t* bitmap_to_array(bool* s, int64_t len) {
 	int64_t primecount = 0;
 	int64_t i, j;
 
 	for (i = 2; i < len; i++) { primecount += s[i]; }
 	int64_t* output = new int64_t[primecount];
-	outputlen = primecount;
 	j = 0;
 
 	for (i = 2; i < len; i++) {
@@ -68,16 +67,6 @@ int main(int argc, char* argv[]) {
 
 	// Allow for the upper bound to be specified as an argument
 	if (argc > 1) { N = std::stol(argv[1]); }
-
-	int32_t n1 = int32_t(ceil(sqrt(N)));
-	bool* s = run_sequential_sieve(n1);
-	int32_t len1;
-	int64_t* prime_array = bitmap_to_array(s, n1 + 1, len1);
-	delete[] s;
-
-	// for debugging
-	//printarray(prime_array, 50);
-
 	int num_td = 1;
 
 	#pragma omp parallel
@@ -86,7 +75,7 @@ int main(int argc, char* argv[]) {
 	}
 
 	std::cout << "Number of threads: " << num_td << std::endl;
-	s = new bool[N+1];
+	bool* s = new bool[N+1];
 	s[0] = 0;
 	s[1] = 0;
 	for (int64_t i = 2; i < N+1; i++) { s[i] = 1; }
@@ -99,7 +88,7 @@ int main(int argc, char* argv[]) {
 			}
 		}
 	}
-	
+
 	double t1 = omp_get_wtime();
 
 	// File output
