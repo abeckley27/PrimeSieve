@@ -2,6 +2,7 @@
 #define utility_fns_h
 
 #include <iostream>
+#include <cmath>
 
 // Prints an array to console, for debugging
 void printarray(int64_t* a, int64_t len) {
@@ -37,13 +38,17 @@ bool* run_sequential_sieve(const int64_t N) {
 	return s;
 }
 
+int64_t primecount(bool* s, int64_t len) {
+    int64_t output = 0;
+	for (int64_t i = 2; i < len; i++) { output += s[i]; }
+    return output;
+}
+
 // This function allocates memory
 int64_t* bitmap_to_array(bool* s, int64_t len) {
-	int64_t primecount = 0;
+	int64_t pcount = primecount(s, len);
+    int64_t* output = new int64_t[pcount];
 	int64_t i, j;
-
-	for (i = 2; i < len; i++) { primecount += s[i]; }
-	int64_t* output = new int64_t[primecount];
 	j = 0;
 
 	for (i = 2; i < len; i++) {
@@ -54,6 +59,25 @@ int64_t* bitmap_to_array(bool* s, int64_t len) {
 	}
 
 	return output;
+}
+
+bool is_prime(int64_t n) {
+
+    // Generate an array of all prime numbers up to sqrt(n)
+    const int32_t root_n = int32_t(ceil(sqrt(n)));
+    bool* s = run_sequential_sieve(root_n);
+    const int64_t L1 = primecount(s, root_n);
+    int64_t* prime_array = bitmap_to_array(s, root_n);
+    
+    // check for prime divisors
+    bool output = (n > 1) && ( (n & 1) || (n == 2) );
+    int32_t i = 1;
+    while (output && (i < L1)) {
+        output = (n % prime_array[i]);
+        i++;
+    }
+
+    return output;
 }
 
 #endif
