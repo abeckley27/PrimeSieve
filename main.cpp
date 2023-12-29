@@ -11,7 +11,7 @@ int main(int argc, char* argv[]) {
             std::cout << start << primality << "prime.\n";
         }
 
-        if (std::string(argv[1]) == "prime_count") {
+        if (std::string(argv[1]) == "count") {
             std::cout << "There are " << pi( std::stoll(argv[2]) ) << " primes below " << argv[2] << std::endl;
         }
 
