@@ -5,14 +5,6 @@
 #include <cmath>
 #include <cstdint>
 
-// I forget why this is here
-void printarray(int64_t* a, int64_t len) {
-	int_fast64_t i;
-	for (i = 0; i < len; i++) {
-		std::cout << a[i] << '\t';
-	}
-	std::cout << std::endl;
-}
 
 // Find all prime numbers below N
 int main(int argc, char* argv[]) {
