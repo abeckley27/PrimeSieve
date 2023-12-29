@@ -4,7 +4,7 @@
 #include <ctime>
 #include <cmath>
 #include <cstdint>
-
+#include "util.h"
 
 // Find all prime numbers below N
 int main(int argc, char* argv[]) {
@@ -17,25 +17,7 @@ int main(int argc, char* argv[]) {
 	// Allow for the upper bound to be specified as an argument
 	if (argc > 1) { N = std::stol(argv[1]); }
 
-	//bitmap for primality
-	bool* s = new bool[N+1];
-
-	// 0 and 1 are not prime
-	s[0] = 0;
-	s[1] = 0;
-	// assume everything else is
-	for (i = 2; i < N; i++) { s[i] = 1; }
-
-
-	//Remove multiples of primes
-	for (int64_t x = 2; x < ceil(sqrt(N)); x++) {
-		if (s[x]) {
-			for (int64_t multiple = x * x; multiple < N + 1; multiple += x) {
-				s[multiple] = 0;
-			}
-		}
-	}
-
+	bool* s = run_sequential_sieve(N);
 	clock_t t1 = clock();
 
 	// File output
