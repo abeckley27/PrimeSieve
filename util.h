@@ -23,11 +23,11 @@ bool* run_sequential_sieve(const int64_t N) {
 	s[1] = 0;
 	// assume everything else is
 	int64_t i;
-	for (i = 2; i < N; i++) { s[i] = 1; }
+	for (i = 2; i <= N; i++) { s[i] = 1; }
 
 
 	//Remove multiples of primes
-	for (int64_t x = 2; x < ceil(sqrt(N)); x++) {
+	for (int64_t x = 2; x <= ceil(sqrt(N)); x++) {
 		if (s[x]) {
 			for (int64_t multiple = x * x; multiple < N + 1; multiple += x) {
 				s[multiple] = 0;
@@ -66,8 +66,8 @@ bool is_prime(int64_t n) {
     // Generate an array of all prime numbers up to sqrt(n)
     const int32_t root_n = int32_t(ceil(sqrt(n)));
     bool* s = run_sequential_sieve(root_n);
-    const int64_t L1 = primecount(s, root_n);
-    int64_t* prime_array = bitmap_to_array(s, root_n);
+    const int64_t L1 = primecount(s, root_n + 1);
+    int64_t* prime_array = bitmap_to_array(s, root_n + 1);
     
     // check for prime divisors
     bool output = (n > 1) && ( (n & 1) || (n == 2) );
