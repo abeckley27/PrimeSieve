@@ -77,7 +77,17 @@ bool is_prime(int64_t n) {
         i++;
     }
 
+    delete[] s;
+
     return output;
 }
+
+int64_t pi(int64_t n) {
+    bool* s = run_sequential_sieve(n);
+    int64_t x = primecount(s, n);
+    delete[] s;
+    return x;
+}
+
 
 #endif
